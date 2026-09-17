@@ -48,6 +48,56 @@ const steps = [
   ['03', 'Acompanhe com clareza', 'Tenha visibilidade do que está atualizado, pendente ou em risco.'],
 ]
 
+const plans = [
+  {
+    id: 'free-trial',
+    title: 'Free Trial',
+    price: 'Grátis',
+    hint: '15 dias',
+    cta: 'Começar grátis',
+    href: 'https://greenvaultapp.com.br/vault/login',
+    highlighted: false,
+    features: [
+      '1 organização',
+      'Até 10 funcionários',
+      '5 GB de armazenamento',
+      'Acesso à pesquisa com IA',
+    ],
+  },
+  {
+    id: 'basico',
+    title: 'Básico',
+    price: 'Mensal',
+    hint: 'assinatura recorrente',
+    cta: 'Comprar',
+    href: '#contato',
+    highlighted: false,
+    features: [
+      '1 organização',
+      'Até 10 funcionários',
+      '15 GB de armazenamento',
+      'Acesso à pesquisa com IA',
+    ],
+  },
+  {
+    id: 'premium',
+    title: 'Premium',
+    price: 'Mensal',
+    hint: 'acesso completo',
+    cta: 'Comprar',
+    href: '#contato',
+    highlighted: true,
+    features: [
+      'N organizações',
+      'Funcionários ilimitados',
+      'Armazenamento ilimitado',
+      'Acesso a todos os módulos',
+      'Acesso à pesquisa com IA',
+    ],
+    note: 'O valor de armazenamento da AWS é repassado na fatura.',
+  },
+]
+
 function BrandWordmark() {
   return (
     <span className="text-xl font-semibold tracking-[-0.04em] text-primary">
@@ -184,6 +234,9 @@ export default function Page() {
             <a className="transition-colors hover:text-foreground" href="#kanban">
               Kanban
             </a>
+            <a className="transition-colors hover:text-foreground" href="#planos">
+              Planos
+            </a>
             <a className="transition-colors hover:text-foreground" href="#contato">
               Contato
             </a>
@@ -220,6 +273,9 @@ export default function Page() {
               </a>
               <a href="#como-funciona" onClick={() => setMenuOpen(false)}>
                 Como funciona
+              </a>
+              <a href="#planos" onClick={() => setMenuOpen(false)}>
+                Planos
               </a>
               <a href="#contato" onClick={() => setMenuOpen(false)}>
                 Contato
@@ -541,6 +597,67 @@ export default function Page() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="planos" className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
+        <div className="max-w-2xl">
+          <SectionEyebrow>Planos</SectionEyebrow>
+          <h2 className="text-balance text-4xl font-semibold leading-tight tracking-[-0.05em] sm:text-5xl">
+            Escolha o plano certo para
+            <br />
+            <span className="text-primary">começar a organizar.</span>
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">
+            Da avaliação gratuita à operação completa. A contratação é feita pelo dono da organização.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          {plans.map((plan) => (
+            <article
+              key={plan.id}
+              className={
+                plan.highlighted
+                  ? 'relative flex h-full flex-col rounded-2xl border-2 border-primary bg-mint/40 p-6 shadow-xl shadow-primary/10 sm:p-8'
+                  : 'relative flex h-full flex-col rounded-2xl border border-border bg-background p-6 sm:p-8'
+              }
+            >
+              {plan.highlighted && (
+                <span className="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
+                  Mais completo
+                </span>
+              )}
+              <p className="text-sm font-semibold text-primary">{plan.title}</p>
+              <div className="mt-4 flex items-end gap-2">
+                <span className="text-4xl font-semibold tracking-tight">{plan.price}</span>
+                <span className="mb-1 text-sm text-muted-foreground">{plan.hint}</span>
+              </div>
+              <ul className="mt-8 grid gap-3 text-sm">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3">
+                    <CircleCheck size={18} className="mt-0.5 shrink-0 text-primary" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-auto pt-8">
+                {plan.note && (
+                  <p className="mb-6 text-xs leading-5 text-muted-foreground">{plan.note}</p>
+                )}
+                <a
+                  href={plan.href}
+                  className={
+                    plan.highlighted
+                      ? 'inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/15 transition hover:-translate-y-0.5'
+                      : 'inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-background px-5 py-3.5 text-sm font-semibold text-foreground transition hover:-translate-y-0.5 hover:bg-muted'
+                  }
+                >
+                  {plan.cta} <ArrowRight size={17} />
+                </a>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
