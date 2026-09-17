@@ -185,7 +185,6 @@ export function buildContactEmailHtml(
   </body>
 </html>`
 }
-
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat('pt-BR', {
     dateStyle: 'long',
@@ -202,3 +201,4 @@ function escapeHtml(value: string) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;')
 }
+
